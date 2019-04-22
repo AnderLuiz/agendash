@@ -119,6 +119,7 @@ The second argument to Agendash is an optional object. Valid keys are:
 
 - `middleware`: Currently only `'express'` is supported. I'd like to use `'koa'` soon.
 - `title`: Defaults to `"Agendash"`. Useful if you are running multiple Agenda pools.
+- `timezone`: Defaults to `null`. Timezone to use in repeatEvery jobs.
 
 ### Help appreciated
 
