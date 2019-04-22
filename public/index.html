@@ -17,11 +17,11 @@
         <div class="sidebar-header">
           <h1 class="page-title"></h1>
           <div class="form-group">
-            <label for="overviewFilter">Filter by name</label>
+            <label for="overviewFilter">Filtrar por nome</label>
             <input type="text" class="overview-filter form-control">
           </div>
           <div class="form-group">
-            <label for="overviewFilter">Refresh interval (seconds)</label>
+            <label for="overviewFilter">Intervalo de atualização (segundos)</label>
             <input type="number" value="2" class="refresh-interval form-control">
           </div>
         </div>
@@ -35,9 +35,9 @@
               <small class="active-state"></small>
             </h2>
             <ul id="select-jobs" class="nav nav-pills">
-              <li role="presentation"><a role="button" data-action="schedule-job">Schedule job</a></li>
-              <li role="presentation"><a role="button" data-action="select-all">Select all</a></li>
-              <li role="presentation"><a role="button" data-action="select-none">Select none</a></li>
+              <li role="presentation"><a role="button" data-action="schedule-job">Agendar Job</a></li>
+              <li role="presentation"><a role="button" data-action="select-all">Selecionar todos</a></li>
+              <li role="presentation"><a role="button" data-action="select-none">Remover seleções</a></li>
             </ul>
             <div class="clearfix"></div>
           </div>
@@ -46,11 +46,11 @@
               <thead>
                 <tr>
                   <th>Status</th>
-                  <th>Name</th>
-                  <th>Last run started</th>
-                  <th>Next run starts</th>
-                  <th>Last finished</th>
-                  <th>Locked</th>
+                  <th>Nome</th>
+                  <th>Última execução (inicio)</th>
+                  <th>Proxima execução</th>
+                  <th>Última execução (final)</th>
+                  <th>Bloqueado?</th>
                 </tr>
               </thead>
               <tbody id="job-list"></tbody>
@@ -58,17 +58,17 @@
           </div>
         </div>
         <div id="details-pane">
-          <h2 class="sub-header"><span class="number-selected">0</span> <small>selected</small></h2>
-          <button type="button" class="btn btn-danger btn-xs" data-action="requeue-jobs">Requeue selected</button>
-          <button type="button" class="btn btn-danger btn-xs pull-right" data-action="delete-jobs">Delete selected</button>
+          <h2 class="sub-header"><span class="number-selected">0</span> <small>selecionado</small></h2>
+          <button type="button" class="btn btn-danger btn-xs" data-action="requeue-jobs">Reagendar selecionado</button>
+          <button type="button" class="btn btn-danger btn-xs pull-right" data-action="delete-jobs">Deletar selecionado</button>
           <hr />
           <div id="details-list"></div>
         </div>
         <div id="create-job-pane">
-          <h2 class="sub-header">Create Job</h2>
+          <h2 class="sub-header">Criar Job</h2>
           <hr />
           <div class="form-group">
-            <label>Job name</label>
+            <label>Nome do Job</label>
             <input type="text" class="job-name form-control">
           </div>
           <div class="form-group">
@@ -84,8 +84,8 @@
             <textarea class="job-data form-control">{}</textarea>
           </div>
           <div class="form-group">
-            <span class="btn btn-default btn-success" data-action="save">Save</span>
-            <span class="btn btn-default btn-warning" data-action="cancel">Cancel</span>
+            <span class="btn btn-default btn-success" data-action="save">Salvar</span>
+            <span class="btn btn-default btn-warning" data-action="cancel">Cancelar</span>
           </div>
         </div>
       </div>
@@ -107,12 +107,12 @@
           </a>
         </li>
         <ul class="nav nav-sidebar">
-          <li data-state="scheduled"><a class="text-info" href="#">Scheduled<span class="label label-info pull-right"><%- scheduled %></span></a></li>
-          <li data-state="queued"><a class="text-primary" href="#">Queued<span class="label label-primary pull-right"><%- queued %></span></a></li>
-          <li data-state="running"><a class="text-warning" href="#">Running<span class="label label-warning pull-right"><%- running %></span></a></li>
-          <li data-state="completed"><a class="text-success" href="#">Completed<span class="label label-success pull-right"><%- completed %></span></a></li>
-          <li data-state="failed"><a class="text-danger" href="#">Failed<span class="label label-danger pull-right"><%- failed %></span></a></li>
-          <li data-state="repeating"><a class="text-info" href="#">Repeating<span class="label label-info pull-right"><%- repeating %></span></a></li>
+          <li data-state="scheduled"><a class="text-info" href="#">Agendado<span class="label label-info pull-right"><%- scheduled %></span></a></li>
+          <li data-state="queued"><a class="text-primary" href="#">Enfileirado<span class="label label-primary pull-right"><%- queued %></span></a></li>
+          <li data-state="running"><a class="text-warning" href="#">Rodando<span class="label label-warning pull-right"><%- running %></span></a></li>
+          <li data-state="completed"><a class="text-success" href="#">Completado<span class="label label-success pull-right"><%- completed %></span></a></li>
+          <li data-state="failed"><a class="text-danger" href="#">Falhou<span class="label label-danger pull-right"><%- failed %></span></a></li>
+          <li data-state="repeating"><a class="text-info" href="#">Repetindo<span class="label label-info pull-right"><%- repeating %></span></a></li>
         </ul>
       </ul>
     </script>
@@ -120,11 +120,11 @@
     <script type="text/template" id="job-item-template">
       <td>
         <% if (repeating) { %><span class="label label-info"><i class="glyphicon glyphicon-repeat"></i> <%- job.repeatInterval %></span><% } %>
-        <% if (scheduled) { %><span class="label label-info">Scheduled</span><% } %>
-        <% if (queued) { %><span class="label label-primary">Queued</span><% } %>
-        <% if (running) { %><span class="label label-warning">Running</span><% } %>
-        <% if (completed) { %><span class="label label-success">Completed</span><% } %>
-        <% if (failed) { %><span class="label label-danger">Failed</span><% } %>
+        <% if (scheduled) { %><span class="label label-info">Agendado</span><% } %>
+        <% if (queued) { %><span class="label label-primary">Enfileirado</span><% } %>
+        <% if (running) { %><span class="label label-warning">Rodando</span><% } %>
+        <% if (completed) { %><span class="label label-success">Completado</span><% } %>
+        <% if (failed) { %><span class="label label-danger">Falhou</span><% } %>
       </td>
       <td>
         <%- job.name %>
@@ -141,29 +141,29 @@
           <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h3 class="panel-title"><%- job.name %></h3>
           <% if (repeating) { %><span class="label label-info"><i class="glyphicon glyphicon-repeat"></i> <%- job.repeatInterval %></span><% } %>
-          <% if (scheduled) { %><span class="label label-info">Scheduled</span><% } %>
-          <% if (queued) { %><span class="label label-primary">Queued</span><% } %>
-          <% if (running) { %><span class="label label-warning">Running</span><% } %>
-          <% if (completed) { %><span class="label label-success">Completed</span><% } %>
-          <% if (failed) { %><span class="label label-danger">Failed</span><% } %>
+          <% if (scheduled) { %><span class="label label-info">Agendado</span><% } %>
+          <% if (queued) { %><span class="label label-primary">Enfileirado</span><% } %>
+          <% if (running) { %><span class="label label-warning">Rodando</span><% } %>
+          <% if (completed) { %><span class="label label-success">Completado</span><% } %>
+          <% if (failed) { %><span class="label label-danger">Falhou</span><% } %>
         </div>
         <div class="panel-body">
-          <% if (job.lastRunAt) { %><p>Last run <time datetime="<%- moment(job.lastRunAt).toISOString() %>"><%- moment(job.lastRunAt).fromNow() %></time></p><% } %>
-          <% if (job.nextRunAt) { %><p>Next run <time datetime="<%- moment(job.nextRunAt).toISOString() %>"><%- moment(job.nextRunAt).fromNow() %></time></p><% } %>
-          <% if (job.lastFinishedAt) { %><p>Last finished <time datetime="<%- moment(job.lastFinishedAt).toISOString() %>"><%- moment(job.lastFinishedAt).fromNow() %></time></p><% } %>
-          <% if (job.lockedAt) { %><p>Locked <time datetime="<%- moment(job.lockedAt).toISOString() %>"><%- moment(job.lockedAt).fromNow() %></time></p><% } %>
-          <% if (job.repeatInterval) { %><p>Repeat each <%- job.repeatInterval %></p><% } %>
+          <% if (job.lastRunAt) { %><p>Última execução <time datetime="<%- moment(job.lastRunAt).toISOString() %>"><%- moment(job.lastRunAt).fromNow() %></time></p><% } %>
+          <% if (job.nextRunAt) { %><p>Próxima execução <time datetime="<%- moment(job.nextRunAt).toISOString() %>"><%- moment(job.nextRunAt).fromNow() %></time></p><% } %>
+          <% if (job.lastFinishedAt) { %><p>Último término <time datetime="<%- moment(job.lastFinishedAt).toISOString() %>"><%- moment(job.lastFinishedAt).fromNow() %></time></p><% } %>
+          <% if (job.lockedAt) { %><p>Bloqueado em <time datetime="<%- moment(job.lockedAt).toISOString() %>"><%- moment(job.lockedAt).fromNow() %></time></p><% } %>
+          <% if (job.repeatInterval) { %><p>Repetir a cada <%- job.repeatInterval %></p><% } %>
           <% if (job.repeatTimezone) { %><p>Timezone: <%- job.repeatTimezone %></p><% } %>
-          <strong>Job data</strong>
+          <strong>Dados do Job(job data)</strong>
           <pre><%- JSON.stringify(job.data, null, 2) %></pre>
           <% if (failed) { %>
-            <strong>Failure reason</strong>
+            <strong>Causa da falha</strong>
             <pre><%- JSON.stringify(job.failReason || '', null, 2) %></pre>
           <% } %>
         </div>
         <div class="panel-footer clearfix">
-          <button type="button" class="btn btn-danger btn-sm" data-action="requeue">Requeue</button>
-          <button type="button" class="btn btn-danger btn-sm pull-right" data-action="delete">Delete permanently</button>
+          <button type="button" class="btn btn-danger btn-sm" data-action="requeue">Re-enfileirar</button>
+          <button type="button" class="btn btn-danger btn-sm pull-right" data-action="delete">Deletar permanentemente</button>
         </div>
       </div>
     </script>
